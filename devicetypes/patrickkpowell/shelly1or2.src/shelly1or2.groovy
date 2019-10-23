@@ -97,7 +97,7 @@ def parse(description) {
       path: "/relay/"+Relay,
       body: action,
       headers: [
-        HOST: getHostAddressPort80(),
+        HOST: getHostAddressPort(),
         "Content-Type": "application/x-www-form-urlencoded"
       ]
     ))
@@ -155,7 +155,7 @@ def parse(description) {
       method: "GET",
       path: "/relay/"+Relay,
       headers: [
-        HOST: getHostAddressPort80(),
+        HOST: getHostAddressPort(),
         "Content-Type": "application/x-www-form-urlencoded"
       ]
     ))
