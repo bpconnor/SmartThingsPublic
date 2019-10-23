@@ -97,7 +97,7 @@ def parse(description) {
       path: "/relay/"+Relay,
       body: action,
       headers: [
-        HOST: getHostAddress(),
+        HOST: getHostAddressPort80(),
         "Content-Type": "application/x-www-form-urlencoded"
       ]
     ))
@@ -106,11 +106,20 @@ def parse(description) {
 
   private getHostAddress() {
     log.debug "Using IP: "+ip+" and PORT: 80 for device: {device.id}"
-    device.deviceNetworkId = convertIPtoHex(ip)+":80" //+convertPortToHex(8+Relay)
+    device.deviceNetworkId = convertIPtoHex(ip)+":" + convertPortToHex(8+Relay)
     log.debug device.deviceNetworkId
     //return ip+":80"
     return device.deviceNetworkId
   }
+
+  private getHostAddressPort80() {
+    log.debug "Using IP: "+ip+" and PORT: 80 for device: {device.id}"
+    String devid = convertIPtoHex(ip)+":" + convertPortToHex(80)
+    log.debug devid
+    //return ip+":80"
+    return devid
+  }
+
 
   private String convertIPtoHex(ipAddress) {
     String hex = ipAddress.tokenize( '.' ).collect { String.format( '%02x', it.toInteger() ) }.join().toUpperCase()
